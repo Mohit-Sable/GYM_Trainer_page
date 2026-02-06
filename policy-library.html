@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy Library - JEDI Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="logo">
+                <span class="logo-emoji"><img src="Retro Computer Colorful Sticker.ico"></span>
+                <span class="logo-text">GYM</span>
+            </div>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li class="active"><a href="policy-library.html">Policy Library</a></li>
+                <li><a href="preferences.html">Preferences</a></li>
+                <li><a href="logout.html">Log out</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-nav">
+                <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
+                <button class="back-btn" onclick="window.history.back()">←</button>
+            </header>
+
+            <section class="grid-layout">
+                <div class="trainer-info">
+                    <h2>Policy Library</h2>
+                    <div class="card">
+                        <h3>Platform Policies</h3>
+                        <p>Review our terms of service, privacy policy, and community guidelines.</p>
+                        <div class="actions">
+                            <button class="btn black-btn">Terms of Service</button>
+                            <button class="btn white-btn">Privacy Policy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work-exp">
+                    <h2>Documents</h2>
+                    <div class="card-list">
+                        <div class="small-card">
+                            <div class="exp-icon">📄</div>
+                            <div>
+                                <strong>Community Guidelines</strong><br>
+                                Updated Jan 2026
+                            </div>
+                        </div>
+                        <div class="small-card">
+                            <div class="exp-icon">🔒</div>
+                            <div>
+                                <strong>Data Protection</strong><br>
+                                Updated Dec 2025
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Close menu when clicking on overlay
+        document.addEventListener('click', function (event) {
+            const sidebar = document.querySelector('.sidebar');
+            const hamburger = document.querySelector('.hamburger-menu');
+
+            if (sidebar.classList.contains('active') &&
+                !sidebar.contains(event.target) &&
+                !hamburger.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking on a navigation link
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelector('.sidebar').classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
