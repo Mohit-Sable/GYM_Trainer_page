@@ -1,0 +1,58 @@
+text = input("Enter Text: ")
+key = int(input("Enter Key: "))
+
+# Encryption
+cipher = ""
+for ch in text:
+    if ch.isalpha():
+        s = 65 if ch.isupper() else 97
+        cipher += chr((ord(ch)-s+key)%26+s)
+    else:
+        cipher += ch
+
+print("\nEncrypted:", cipher)
+
+# Brute Force
+print("\nBrute Force:")
+for k in range(26):
+    plain = ""
+    for ch in cipher:
+        if ch.isalpha():
+            s = 65 if ch.isupper() else 97
+            plain += chr((ord(ch)-s-k)%26+s)
+        else:
+            plain += ch
+    print("Key", k, ":", plain)
+
+# Decryption
+plain = ""
+for ch in cipher:
+    if ch.isalpha():
+        s = 65 if ch.isupper() else 97
+        plain += chr((ord(ch)-s-key)%26+s)
+    else:
+        plain += ch
+
+print("\nDecrypted:", plain)
+
+# Encrypt Again
+cipher2 = ""
+for ch in plain:
+    if ch.isalpha():
+        s = 65 if ch.isupper() else 97
+        cipher2 += chr((ord(ch)-s+key)%26+s)
+    else:
+        cipher2 += ch
+
+print("Encrypted Again:", cipher2)from collections import Counter
+
+cipher = input("Enter Cipher Text: ").upper()
+
+letters = [c for c in cipher if c.isalpha()]
+
+count = Counter(letters)
+
+print("\nLetter Frequency:")
+
+for letter, freq in count.items():
+    print(letter, ":", freq)
