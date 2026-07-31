@@ -1,0 +1,61 @@
+import string
+from collections import Counter
+# ----------------------------
+# Monoalphabetic Substitution Key
+# ----------------------------
+plain_alphabet = string.ascii_uppercase
+cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
+encrypt_dict = dict(zip(plain_alphabet, cipher_alphabet))
+decrypt_dict = dict(zip(cipher_alphabet, plain_alphabet))
+# ----------------------------
+# Encryption
+# ----------------------------
+
+def encrypt(text):
+    ciphertext = ""
+    for ch in text.upper():
+        if ch in encrypt_dict:
+            ciphertext += encrypt_dict[ch]
+        else:
+            ciphertext += ch
+    return ciphertext
+# ----------------------------
+# Decryption (Using Key)
+# ----------------------------
+def decrypt(cipher):
+    plaintext = ""
+    for ch in cipher.upper():
+        if ch in decrypt_dict:
+            plaintext += decrypt_dict[ch]
+        else:
+            plaintext += ch
+    return plaintext
+# ----------------------------
+# Frequency Analysis
+# ----------------------------
+def frequency_analysis(cipher):
+    letters = [c for c in cipher if c.isalpha()]
+    freq = Counter(letters)
+    print("\nLetter Frequencies\n")
+    total = sum(freq.values())
+    for letter, count in freq.most_common():
+        print(f"{letter} : {count} ({count/total*100:.2f}%)")
+    english_order = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+    cipher_order = ''.join([x[0] for x in freq.most_common()])
+    print("\nMost Frequent Cipher Letters :")
+    print(cipher_order)
+    print("\nTypical English Frequency Order :")
+    print(english_order)
+    print("\nPossible Mapping:")
+    for c, e in zip(cipher_order, english_order):
+        print(f"{c} --> {e}")
+# ---------------------------
+# Main Program
+# ----------------------------
+plaintext = input("Enter Plaintext : ")
+ciphertext = encrypt(plaintext)
+print("\nEncrypted Text :")
+print(ciphertext)
+print("\nDecrypted Text :")
+print(decrypt(ciphertext))
+frequency_analysis(ciphertext)
