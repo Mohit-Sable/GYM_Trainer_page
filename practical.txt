@@ -1,15 +1,11 @@
 import string
 from collections import Counter
-# ----------------------------
-# Monoalphabetic Substitution Key
-# ----------------------------
+
 plain_alphabet = string.ascii_uppercase
 cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
+
 encrypt_dict = dict(zip(plain_alphabet, cipher_alphabet))
 decrypt_dict = dict(zip(cipher_alphabet, plain_alphabet))
-# ----------------------------
-# Encryption
-# ----------------------------
 
 def encrypt(text):
     ciphertext = ""
@@ -19,9 +15,7 @@ def encrypt(text):
         else:
             ciphertext += ch
     return ciphertext
-# ----------------------------
-# Decryption (Using Key)
-# ----------------------------
+
 def decrypt(cipher):
     plaintext = ""
     for ch in cipher.upper():
@@ -30,32 +24,37 @@ def decrypt(cipher):
         else:
             plaintext += ch
     return plaintext
-# ----------------------------
-# Frequency Analysis
-# ----------------------------
+
 def frequency_analysis(cipher):
-    letters = [c for c in cipher if c.isalpha()]
+    letters = [c for c in cipher.upper() if c.isalpha()]
     freq = Counter(letters)
-    print("\nLetter Frequencies\n")
+
+    print("\nLetter Frequencies:\n")
+
     total = sum(freq.values())
     for letter, count in freq.most_common():
-        print(f"{letter} : {count} ({count/total*100:.2f}%)")
+        print(f"{letter} : {count} ({count / total * 100:.2f}%)")
+
     english_order = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
-    cipher_order = ''.join([x[0] for x in freq.most_common()])
-    print("\nMost Frequent Cipher Letters :")
+    cipher_order = "".join(letter for letter, _ in freq.most_common())
+
+    print("\nMost Frequent Cipher Letters:")
     print(cipher_order)
-    print("\nTypical English Frequency Order :")
+
+    print("\nTypical English Frequency Order:")
     print(english_order)
+
     print("\nPossible Mapping:")
     for c, e in zip(cipher_order, english_order):
         print(f"{c} --> {e}")
-# ---------------------------
-# Main Program
-# ----------------------------
-plaintext = input("Enter Plaintext : ")
+
+plaintext = input("Enter Plaintext: ")
 ciphertext = encrypt(plaintext)
-print("\nEncrypted Text :")
+
+print("\nEncrypted Text:")
 print(ciphertext)
-print("\nDecrypted Text :")
+
+print("\nDecrypted Text:")
 print(decrypt(ciphertext))
+
 frequency_analysis(ciphertext)
